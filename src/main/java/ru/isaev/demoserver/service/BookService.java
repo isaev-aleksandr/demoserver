@@ -1,39 +1,23 @@
 package ru.isaev.demoserver.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.isaev.demoserver.model.Book;
 import ru.isaev.demoserver.repository.BookRepository;
 
 import java.util.List;
 
-@Service
-public class BookService {
+public interface BookService {
 
-    private final BookRepository bookRepository;
+    public void setBookRepository(BookRepository bookRepository);
 
-    @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    public List<Book> showAllBookInRepo();
 
-    public Book findById (Short id){
-        return bookRepository.getOne(id);
-    }
+    public void saveBookInRepo (Book book);
 
-    public List<Book> findAll (){
-        return bookRepository.findAll();
-    }
+    public void deleteBookByIDInRepo(short id);
 
-    public void saveBook (Book book){
-        bookRepository.save(book);
-    }
+    public Book findByIDInRepo(short id);
 
-    public void deleteById(Short id){
-        bookRepository.deleteById(id);
-    }
+    public void updateBookInRepo(Book book);
 
-    public List<Book> findAllByBookNameOrGenreOrAuthor (String request){
-        return bookRepository.findAllByBookNameOrGenreOrAuthor(request, request, request);
-    }
+    public List<Book> findAllByBookNameOrGenreOrAuthorInRepo(String request);
 }
