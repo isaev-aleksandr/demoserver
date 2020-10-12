@@ -3,6 +3,8 @@ package ru.isaev.demoserver.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+import ru.isaev.demoserver.controllers.requestException.ThereIsEmptyRequestException;
+import ru.isaev.demoserver.controllers.requestException.ThereIsUnacceptableValueException;
 import ru.isaev.demoserver.model.Book;
 import ru.isaev.demoserver.service.BookService;
 
@@ -33,7 +35,7 @@ public class BookController {
     @DeleteMapping("/book-delete/{id}")
     public List<Book> deleteBook(@PathVariable("id") Short id){
         if(id < 1 || id == null){
-            return null;
+            throw new ThereIsUnacceptableValueException();
         }
         bookServiceImpl.deleteBookByIDInRepo(id);
         return bookServiceImpl.showAllBookInRepo();
@@ -42,7 +44,7 @@ public class BookController {
     @GetMapping("/book-get/{id}")
     public Book updateBook(@PathVariable("id") Short id){
         if(id < 1 || id == null){
-            return null;
+            throw  new ThereIsUnacceptableValueException();
         }
         return bookServiceImpl.findByIDInRepo(id);
     }
@@ -56,7 +58,7 @@ public class BookController {
     @GetMapping("/book-search")
     public List<Book> searchBook(@RequestParam("bookName") String request){
         if (request == "" || request == null) {
-            return null;
+            throw  new ThereIsEmptyRequestException();
         }
         return bookServiceImpl.findAllByBookNameOrGenreOrAuthorInRepo(request);
     }

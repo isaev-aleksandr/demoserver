@@ -1,4 +1,4 @@
-package ru.isaev.demoserver.repository;
+package ru.isaev.demoserver.persist;
 
 import ru.isaev.demoserver.model.Book;
 import javax.persistence.EntityManager;

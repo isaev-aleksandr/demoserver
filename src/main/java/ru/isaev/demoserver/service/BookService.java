@@ -1,7 +1,7 @@
 package ru.isaev.demoserver.service;
 
 import ru.isaev.demoserver.model.Book;
-import ru.isaev.demoserver.repository.BookRepository;
+import ru.isaev.demoserver.persist.BookRepository;
 
 import java.util.List;
 

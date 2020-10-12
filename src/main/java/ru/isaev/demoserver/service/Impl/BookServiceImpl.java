@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isaev.demoserver.model.Book;
-import ru.isaev.demoserver.repository.BookRepository;
+import ru.isaev.demoserver.persist.BookRepository;
 import ru.isaev.demoserver.service.BookService;
 
 
@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService{
     @Override
     @Transactional
     public Book findByIDInRepo(short id) {
-        return bookRepositoryImpl.findByIDInDB(id);
+            return bookRepositoryImpl.findByIDInDB(id);
     }
 
     @Override

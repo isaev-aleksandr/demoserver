@@ -1,4 +1,4 @@
-package ru.isaev.demoserver.controllers;
+package ru.isaev.demoserver.controllers.requestException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
