@@ -1,7 +1,9 @@
 package ru.isaev.demoserver.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.isaev.demoserver.model.Book;
 import ru.isaev.demoserver.repository.BookRepository;
 import ru.isaev.demoserver.service.BookService;
@@ -10,44 +12,51 @@ import ru.isaev.demoserver.service.BookService;
 import java.util.List;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements BookService{
 
-    private BookRepository bookRepository;
+    private BookRepository bookRepositoryImpl;
 
     @Autowired
     @Override
-    public void setBookRepository (BookRepository bookRepository){
-        this.bookRepository = bookRepository;
+    public void setBookRepository (@Qualifier(value = "bookRepositoryImpl") BookRepository bookRepositoryImpl){
+        this.bookRepositoryImpl = bookRepositoryImpl;
     }
 
     @Override
+    @Transactional
     public List<Book> showAllBookInRepo() {
-        return bookRepository.showAllInDB();
+        return bookRepositoryImpl.showAllInDB();
     }
 
     @Override
+    @Transactional
     public void saveBookInRepo (Book book){
-        bookRepository.saveBookInDB(book);
+        bookRepositoryImpl.saveBookInDB(book);
     }
 
     @Override
+    @Transactional
     public void deleteBookByIDInRepo(short id){
-        bookRepository.deleteBookByIDInDB(id);
+        bookRepositoryImpl.deleteBookByIDInDB(id);
     }
 
     @Override
+    @Transactional
     public Book findByIDInRepo(short id) {
-        return bookRepository.findByIDInDB(id);
+        return bookRepositoryImpl.findByIDInDB(id);
     }
 
     @Override
-    public void updateBookInRepo(Book book){
-        bookRepository.updateBookInDB(book);
+    @Transactional
+    public Book updateBookInRepo(Book book){
+        bookRepositoryImpl.updateBookInDB(book);
+        return findByIDInRepo(book.getId());
     }
 
     @Override
+    @Transactional
     public List<Book> findAllByBookNameOrGenreOrAuthorInRepo(String request){
-        return bookRepository.findAllByBookNameOrGenreOrAuthorInDB(request);
+        return bookRepositoryImpl.findAllByBookNameOrGenreOrAuthorInDB(request);
     }
 
 }

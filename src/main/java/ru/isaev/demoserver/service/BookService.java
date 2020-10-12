@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService {
 
-    public void setBookRepository(BookRepository bookRepository);
+    public void setBookRepository(BookRepository bookRepositoryImpl);
 
     public List<Book> showAllBookInRepo();
 
@@ -17,7 +17,7 @@ public interface BookService {
 
     public Book findByIDInRepo(short id);
 
-    public void updateBookInRepo(Book book);
+    public Book updateBookInRepo(Book book);
 
     public List<Book> findAllByBookNameOrGenreOrAuthorInRepo(String request);
 }
