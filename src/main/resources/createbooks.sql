@@ -1,7 +1,7 @@
 create table IF NOT EXISTS books
 (
-    id serial constraint books_pkey
-            primary key,
+    id smallint not null generated always
+        as identity primary key,
     book_name   varchar(50) not null,
     genre       varchar(50) not null,
     author      varchar(50) not null,

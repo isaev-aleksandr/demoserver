@@ -1,5 +1,6 @@
 package ru.isaev.demoserver.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -52,6 +53,7 @@ public class Config {
 
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "validate");
 
         return hibernateProperties;
     }
@@ -64,6 +66,14 @@ public class Config {
     @Bean
     public TransactionTemplate transactionTemplate() {
         return new TransactionTemplate(transactionManager());
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:/db/changelog/db.changelog-master.xml");
+        liquibase.setDataSource(dataSource());
+        return liquibase;
     }
 
 }

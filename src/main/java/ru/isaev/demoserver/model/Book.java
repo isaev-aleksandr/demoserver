@@ -38,7 +38,7 @@ public class Book {
     private  String genre;
 
     @NotNull(message = "Автор книги не может быть null")
-    @Size(min = 12, message="Длина ФИО автора должна быть больше 12 символов")
+    @Size(min = 5, message="Длина ФИО автора должна быть больше 5 символов")
     @Column(name = "author", nullable = false)
     private  String author;
 
