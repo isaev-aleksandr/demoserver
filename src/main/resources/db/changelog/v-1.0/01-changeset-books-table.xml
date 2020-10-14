@@ -17,6 +17,9 @@
             <column name="count_pages" type="smallint"></column>
             <column name="price" type="smallint"></column>
         </createTable>
+        <rollback>
+            <dropTable tableName="books"/>
+        </rollback>
     </changeSet>
 
     <changeSet id="2" author="isaev">

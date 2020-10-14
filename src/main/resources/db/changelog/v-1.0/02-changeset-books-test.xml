@@ -5,23 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="3" author="isaev">
-        <sqlFile dbms="postgesql"
+    <changeSet id="3" author="isaev" dbms="postgresql">
+        <sqlFile
                  encoding="utf8"
                  endDelimiter="\nGO"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
-                 path="01-insert-books-test.sql"/>
-        <rollback>
-            <sqlFile dbms="postgesql"
-                     encoding="utf8"
-                     endDelimiter="\nGO"
-                     relativeToChangelogFile="true"
-                     splitStatements="true"
-                     stripComments="true"
-                     path="01-drop-books-table.sql"/>
-        </rollback>
+                 path="02-insert-books-test.sql"/>
     </changeSet>
 
 </databaseChangeLog>
